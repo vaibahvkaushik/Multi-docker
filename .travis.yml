@@ -16,4 +16,11 @@ after_success:
    - docker build -t vaibhav/multi-nginx ./nginx
    - docker build -t vaibhav/multi-server ./server
    - docker build -t vaibhav/multi-worker ./worker
+   # Log in to the docker CLI
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
+   # Take those images and push them to docker hub
+   - docker push vaibhav/multi-client
+   - docker push vaibhav/multi-nginx
+   - docker push vaibhav/multi-server
+   - docker push vaibhav/multi-worker
 
