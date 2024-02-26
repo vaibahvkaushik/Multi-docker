@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "vaibhav/multi-client",
+            "hostname": "client",
+            "essential": false 
+        },
+        {
+            "name": "server",
+            "image": "vaibhav/multi-server",
+            "hostname": "api",
+            "essential": false 
+        },
+        {
+            "name": "worker",
+            "image": "vaibhav/multi-worker",
+            "hostname": "worker",
+            "essential": false 
+        },
+        {
+            "name": "nginx",
+            "image": "vaibhav/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
